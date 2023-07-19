@@ -1,0 +1,14 @@
+<div class="proyectos-container">
+  <div class="card" *ngFor="let proyecto of proyectos">
+    <img *ngIf="proyecto.imagenes && proyecto.imagenes.length > 0" [src]="proyecto.imagenes[0]" class="card-img-top"
+      [alt]="'Imagen del proyecto ' + proyecto.nombre">
+    <div class="card-body">
+      <h5 class="card-title">{{proyecto.nombre}}</h5>
+      <p class="card-text text-secondary">{{proyecto.fechaCreacion | date}}</p>
+      <p class="card-text">
+        {{proyecto.descripcion}}
+      </p>
+      <a *ngIf="proyecto.url" [href]="proyecto.url" target="_blank" class="card-link">Visitar</a>
+    </div>
+  </div>
+</div>
