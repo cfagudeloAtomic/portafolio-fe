@@ -7,5 +7,14 @@
   <main class="flex-shrink-0 container" style="margin-top: 2rem;">
     <h1>Mis proyectos</h1>
     <app-lista-proyectos></app-lista-proyectos>
+    <div style="margin-top: 1rem;">
+      <button (click)="collapse.toggle()" type="button" class="btn"
+        [ngClass]="isCollapsed ? 'btn-success' : 'btn-warning'">
+        {{isCollapsed ? 'Nuevo proyecto' : 'Descartar' }}
+      </button>
+      <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+        <app-formulario-proyecto></app-formulario-proyecto>
+      </div>
+    </div>
   </main>
 </div>

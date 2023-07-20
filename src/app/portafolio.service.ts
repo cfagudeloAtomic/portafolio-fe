@@ -8,9 +8,18 @@ import { PROYECTOS } from './mock-proyectos';
   providedIn: 'root'
 })
 export class PortafolioService {
-  constructor() { }
+  private proyectos: Proyecto[];
+
+  constructor() {
+    this.proyectos = PROYECTOS;
+  }
 
   obtenerProyectos(): Observable<Proyecto[]> {
-    return of(PROYECTOS);
+    return of(this.proyectos);
+  }
+
+  agregarProyecto(proyecto: Proyecto): Observable<Proyecto> {
+    this.proyectos.push(proyecto);
+    return of(proyecto);
   }
 }

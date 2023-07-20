@@ -1,0 +1,40 @@
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="proyectoForm" (submit)="guardarProyecto($event)">
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre:</label>
+        <input id="nombre" type="text" formControlName="nombre" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripcion:</label>
+        <input id="descripcion" type="textarea" formControlName="descripcion" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label for="url" class="form-label">URL: </label>
+        <input id="url" type="text" formControlName="url" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Fecha de creacion:</label>
+        <br>
+        <ngb-datepicker formControlName="fechaCreacion"></ngb-datepicker>
+      </div>
+
+      <div formArrayName="imagenes">
+        <h2>Imagenes</h2>
+        <div *ngFor="let imagen of imagenes.controls; let i=index">
+          <label for="imagen-{{ i }}" class="form-label">Imagen #{{i+1}}:</label>
+          <input id="imagen-{{ i }}" type="text" [formControlName]="i" class="form-control">
+        </div>
+        <div>
+          <button (click)="anadirImagen()" class="btn btn-primary">+</button>
+          <button (click)="removerImagen()" class="btn btn-danger" style="margin-left: 10px;">-</button>
+        </div>
+      </div>
+      <div style="margin-top: 1rem;">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Proyecto } from '../proyecto';
-import { PROYECTOS } from '../mock-proyectos';
 import { PortafolioService } from '../portafolio.service';
 
 @Component({
