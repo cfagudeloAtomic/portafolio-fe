@@ -1,0 +1,18 @@
+<div *ngIf="proyecto">
+  <h2>
+    {{proyecto.nombre}}
+    <small class="text-body-secondary">(ID: {{proyecto.id}})</small>
+  </h2>
+  <h3><small class="text-body-secondary">Creado el {{proyecto.fechaCreacion | date}}</small></h3>
+
+  <ngb-carousel *ngIf="proyecto.imagenes && proyecto.imagenes.length > 0">
+    <ng-template *ngFor="let imagen of proyecto.imagenes; let i = index" ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img [src]="imagen" alt="Imagen #{{i + 1}} del proyecto" />
+      </div>
+    </ng-template>
+  </ngb-carousel>
+
+  <p>{{proyecto.descripcion}}</p>
+  <a *ngIf="proyecto.url" [href]="proyecto.url" target="_blank" class="btn btn-secondary">Visitar URL</a>
+</div>

@@ -9,6 +9,12 @@
         {{proyecto.descripcion}}
       </p>
       <a *ngIf="proyecto.url" [href]="proyecto.url" target="_blank" class="card-link">Visitar</a>
+      <div>
+        <a [routerLink]="'/proyectos/'+proyecto.id" class="btn btn-primary">Ver detalle</a>
+      </div>
     </div>
   </div>
+</div>
+<div style="margin-top: 1rem;">
+  <a routerLink="/proyectos/new" class="btn btn-primary">Crear nuevo proyecto</a>
 </div>

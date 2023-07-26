@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { PortafolioService } from '../portafolio.service';
 import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
+import { PortafolioService } from '../portafolio.service';
 @Component({
   selector: 'app-formulario-proyecto',
   templateUrl: './formulario-proyecto.component.html',
@@ -11,7 +12,11 @@ import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 export class FormularioProyectoComponent {
   proyectoForm: FormGroup;
 
-  constructor(private portafolioService: PortafolioService, private calendar: NgbCalendar) {
+  constructor(
+    private router: Router,
+    private portafolioService: PortafolioService,
+    private calendar: NgbCalendar,
+  ) {
     this.proyectoForm = new FormGroup({
       nombre: new FormControl('', [Validators.required, Validators.maxLength(20)]),
       descripcion: new FormControl('', Validators.required),
@@ -26,7 +31,9 @@ export class FormularioProyectoComponent {
     if (this.proyectoForm.invalid) {
       return;
     }
-    this.portafolioService.agregarProyecto(this.proyectoForm.value);
+    this.portafolioService.
+      agregarProyecto(this.proyectoForm.value).
+      subscribe(p => this.router.navigate(['proyectos']));
   }
 
   get imagenes(): FormArray {

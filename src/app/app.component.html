@@ -2,19 +2,14 @@
   <nav class="navbar bg-dark">
     <div class="container-fluid">
       <span class="navbar-brand text-white">Portafolio</span>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="proyectos">Proyectos</a>
+        </li>
+      </ul>
     </div>
   </nav>
   <main class="flex-shrink-0 container" style="margin-top: 2rem;">
-    <h1>Mis proyectos</h1>
-    <app-lista-proyectos></app-lista-proyectos>
-    <div style="margin-top: 1rem;">
-      <button (click)="collapse.toggle()" type="button" class="btn"
-        [ngClass]="isCollapsed ? 'btn-success' : 'btn-warning'">
-        {{isCollapsed ? 'Nuevo proyecto' : 'Descartar' }}
-      </button>
-      <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-        <app-formulario-proyecto></app-formulario-proyecto>
-      </div>
-    </div>
+    <router-outlet></router-outlet>
   </main>
 </div>
