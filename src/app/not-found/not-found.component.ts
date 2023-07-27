@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
     <img src="assets/404.jpeg">
   `
 })
-export class NotFoundComponent {
-
-}
+export class NotFoundComponent { }

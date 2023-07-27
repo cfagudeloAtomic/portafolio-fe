@@ -1,32 +1,41 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { v4 as uuidv4 } from 'uuid';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 
 import { Proyecto } from './proyecto';
-import { PROYECTOS } from './mock-proyectos';
+import { environment } from './../environments/environment';
+import { AlertasService } from './alertas.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PortafolioService {
-  private proyectos: Proyecto[];
+  private baseURL = environment.API_URL;
 
-  constructor() {
-    this.proyectos = PROYECTOS;
+  private options = {
+    headers: {
+      "X-Sec-4-Email": environment.EMAIL,
+      "Content-Type": "application/json"
+    },
+  }
+
+  constructor(private http: HttpClient, private alertasService: AlertasService) {
   }
 
   obtenerProyectos(): Observable<Proyecto[]> {
-    return of(this.proyectos);
+    return this.http.get<Proyecto[]>(`${this.baseURL}/portafolios`, this.options);
   }
 
-  obtenerProyecto(id: string): Observable<Proyecto | undefined> {
-    const proyecto = this.proyectos.find(p => p.id === id);
-    return of(proyecto);
+  obtenerProyecto(id: string): Observable<Proyecto> {
+    return this.http.get<Proyecto>(`${this.baseURL}/portafolios/${id}`, this.options);
   }
 
   agregarProyecto(proyecto: Proyecto): Observable<Proyecto> {
-    proyecto.id = uuidv4();
-    this.proyectos.push(proyecto);
-    return of(proyecto);
+    return this.http.post<Proyecto>(`${this.baseURL}/portafolios`, proyecto, this.options).pipe(
+      tap(_ => this.alertasService.agregarAlerta({
+        msg: "El proyecto fue creado exitosamente",
+        tipo: "success"
+      })),
+    );
   }
 }

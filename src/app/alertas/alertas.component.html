@@ -1,0 +1,3 @@
+<div *ngFor="let alerta of alertas; let i = index">
+  <ngb-alert [type]="alerta.tipo" (closed)="removerAlerta(i)">{{alerta.msg}}</ngb-alert>
+</div>
