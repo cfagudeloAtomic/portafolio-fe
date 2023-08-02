@@ -29,8 +29,8 @@
           <input id="imagen-{{ i }}" type="text" [formControlName]="i" class="form-control">
         </div>
         <div>
-          <button (click)="anadirImagen()" class="btn btn-primary">+</button>
-          <button (click)="removerImagen()" class="btn btn-danger" style="margin-left: 10px;">-</button>
+          <button type="button" (click)="anadirImagen()" class="btn btn-primary">+</button>
+          <button type="button" (click)="removerImagen()" class="btn btn-danger" style="margin-left: 10px;">-</button>
         </div>
       </div>
       <div style="margin-top: 1rem;">
